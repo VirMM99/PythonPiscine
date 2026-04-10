@@ -2,9 +2,12 @@
 
 import math
 
+
 def get_player_pos():
     while True:
-        user_input = input("Enter new coordinates as floats in format 'x,y,z': ")
+        user_input = input(
+                            "Enter new coordinates as "
+                            "floats in format 'x,y,z': ")
         parts = user_input.split(',')
         if len(parts) != 3:
             print("Invalid syntax")
@@ -15,21 +18,24 @@ def get_player_pos():
             try:
                 valid_coord.append(float(arg.strip()))
             except ValueError:
-                print(f"Error on parameter '{arg.strip()}': could not convert string to float: '{arg.strip()}'")
+                print(
+                    f"Error on parameter '{arg.strip()}': "
+                    f"could not convert string to float: '{arg.strip()}'")
                 error = True
                 break
         if not error:
             return tuple(valid_coord)
 
 
-def calculate_distance(position) -> None:
+def calculate_distance(position) -> float:
     x, y, z = position
     return math.sqrt(x**2 + y**2 + z**2)
-def distance_in_between(p1, p2):
+
+
+def distance_in_between(p1, p2) -> float:
     x1, y1, z1 = p1
     x2, y2, z2 = p2
     return math.sqrt((x2-x1)**2 + (y2-y1)**2 + (z2-z1)**2)
-
 
 
 if __name__ == "__main__":
@@ -43,4 +49,6 @@ if __name__ == "__main__":
     print()
     print("Get a second set of coordinates")
     pos2 = get_player_pos()
-    print(f"Distance between the 2 sets of coordinates: {round(distance_in_between(pos1, pos2), 4)}")
+    print(
+        "Distance between the 2 sets of coordinates: "
+        f"{round(distance_in_between(pos1, pos2), 4)}")

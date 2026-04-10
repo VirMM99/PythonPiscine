@@ -2,9 +2,13 @@
 
 import sys
 
-def count_of_args(av: str) -> None:
+
+def count_of_args(av: list[str]) -> None:
     if len(av) <= 1:
-        print("No scores provided. Usage: python3 ft_score_analytics.py <score1> <score2> ...")
+        print(
+            "No scores provided. "
+            "Usage: python3 ft_score_analytics.py "
+            "<score1> <score2> ...")
         return
     valid_scores = []
     for arg in av[1:]:
@@ -14,7 +18,10 @@ def count_of_args(av: str) -> None:
         except ValueError:
             print(f"Invalid parameter: '{arg}'")
     if not valid_scores:
-        print("No scores provided. Usage: python3 ft_score_analytics.py <score1> <score2> ...")
+        print(
+            "No scores provided. "
+            "Usage: python3 ft_score_analytics.py "
+            "<score1> <score2> ...")
         return
     else:
         print(f"Scores processed: {valid_scores}")

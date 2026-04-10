@@ -2,6 +2,7 @@
 
 import sys
 
+
 def main():
     # Scrip name is [0] sys.argv[1:] is where real data starts
     args = sys.argv[1:]
@@ -41,8 +42,12 @@ def main():
             max_item = item
         if min_item is None or inventory[item] < inventory[min_item]:
             min_item = item
-    print(f"Item most abundant: {max_item} with quantity {inventory[max_item]}")
-    print(f"Item least abundant: {min_item} with quantity {inventory[min_item]}")
+    print(
+        f"Item most abundant: {max_item} with quantity "
+        f"{inventory[max_item]}")
+    print(
+        f"Item least abundant: {min_item} with quantity "
+        f"{inventory[min_item]}")
     # For adding new item
     inventory.update({"magic_item": 1})
     print(f"Update inventory: {inventory}")

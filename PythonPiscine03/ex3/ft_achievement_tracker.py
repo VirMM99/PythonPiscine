@@ -19,11 +19,14 @@ achievements = [
     "Sharp Mind",
     "Hidden Path Finder"
 ]
+
+
 # To generate a player's achievements
 def gen_player_achievements():
     count = random.randint(4, len(achievements))
     selected = random.sample(achievements, count)
     return set(selected)
+
 
 # Create players
 alice = gen_player_achievements()
@@ -34,10 +37,10 @@ dylan = gen_player_achievements()
 # All achievements
 all_achievements = alice.union(bob, charlie, dylan)
 
-# 
+# Common Achivements
 common_achievements = alice.intersection(bob, charlie, dylan)
 
-# Unique achievements 
+# Unique achievements
 only_alice = alice.difference(bob.union(charlie, dylan))
 only_bob = bob.difference(alice.union(charlie, dylan))
 only_charlie = charlie.difference(bob.union(alice, dylan))
