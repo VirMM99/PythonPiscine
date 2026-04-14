@@ -15,7 +15,7 @@ def main():
     try:
         f = open(filename, "r")
     except Exception as e:
-        print(f"Error opening file '{filename}': {e}")
+        sys.stderr.write(f"[STDERR] Error opening file '{filename}': {e}\n")
         return
 
     content = []
@@ -39,12 +39,19 @@ def main():
     print("\n")
     print("---")
 
-    new_file = input("Enter new file name (or empty):")
+    sys.stdout.write("Enter new file name (or empty): ")
+    sys.stdout.flush()
+    new_file = sys.stdin.readline().rstrip("\n")
     if new_file == "":
         print("Not saving data.")
         return
     print(f"Saving data to '{new_file}'")
-    f = open(new_file, "w")
+    try:
+        f = open(new_file, "w")
+    except Exception as e:
+        sys.stderr.write(f"[STDERR] Error opening file '{filename}': {e}\n")
+        print("Data not saved.")
+        return
     for line in new_content:
         f.write(line + "\n")
     f.close()
