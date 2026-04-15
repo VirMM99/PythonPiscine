@@ -53,3 +53,12 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# Structure you should have now
+# 1.Read file + store content 
+# 2.Print original 
+# 3.Close file 
+# 4.Transform content 
+# 5.Print transformed 
+# 6.Ask user input 
+# Save or not
