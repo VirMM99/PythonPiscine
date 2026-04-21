@@ -1,25 +1,30 @@
 
 
 from abc import ABC, abstractmethod
-from typing import Any
+from typing import Any, List
+
 
 class DataProcessor(ABC):
     def __init__(self) -> None:
-        self._data = []  # Data guarda ingested values (FIFO queue) 
-        self._counter = 0 # Keeps track of output order
+        self._data: List[str] = []  # Data guarda ingested values (FIFO queue)
+        self._counter: int = 0  # Keeps track of output order
+
     @abstractmethod
     def validate(self, data: Any) -> bool:
         pass  # Debe acceptar any y retornar True or False
+
     @abstractmethod
     def ingest(self, data: Any) -> None:
-        pass  #Child classes will override this con tipos mas específicos
+        pass  # Child classes will override this con tipos mas específicos
+
     def output(self) -> tuple[int, str]:
         if not self._data:
             raise ValueError("No data available")
         value = self._data.pop(0)  # Take the oldest value
         index = self._counter
         self._counter += 1
-        return index, value # Retorna index y value y lo borra del storage
+        return index, value  # Retorna index y value y lo borra del storage
+
 
 # Convierte numbers en strings, store data (maneja nun simples y lista de nums)
 class NumericProcessor(DataProcessor):
@@ -29,14 +34,16 @@ class NumericProcessor(DataProcessor):
         if isinstance(data, list):
             return all(isinstance(x, (int, float)) for x in data)
         return False
+
     def ingest(self, data) -> None:
         if not self.validate(data):
-            raise ValueError("Improper numeric data") # Todo: process y store
+            raise ValueError("Improper numeric data")  # Todo: process y store
         if isinstance(data, list):
             for x in data:
                 self._data.append(str(x))
         else:
             self._data.append(str(data))
+
 
 # Acepta str y listas[str]. No se necesita conversor en esta
 class TextProcessor(DataProcessor):
@@ -46,6 +53,7 @@ class TextProcessor(DataProcessor):
         if isinstance(data, list):
             return all(isinstance(x, str) for x in data)
         return False
+
     def ingest(self, data) -> None:
         if not self.validate(data):
             raise ValueError("Improper text data")
@@ -54,22 +62,26 @@ class TextProcessor(DataProcessor):
         else:
             self._data.append(data)
 
+
 # Acepta dict[(KEY)str, (VALUE)str] o listas de dicts
 class LogProcessor(DataProcessor):
     def validate(self, data: Any) -> bool:
         def is_valid_dict(d):
             return (
-                isinstance (d, dict)
-                and all(isinstance(k, str) and isinstance(v, str) for k, v in d.items())
-            )
+                    isinstance(d, dict)
+                    and all(isinstance(k, str) and isinstance(v, str)
+                            for k, v in d.items())
+                    )
         if is_valid_dict(data):
             return True
         if isinstance(data, list):
             return all(is_valid_dict(d) for d in data)
         return False
+
     def ingest(self, data) -> None:
         if not self.validate(data):
             raise ValueError("Improper log data")
+
         def format_log(d):
             return f"{d['log_level']}: {d['log_message']}"
         if isinstance(data, list):
@@ -85,7 +97,7 @@ if __name__ == '__main__':
     print("Testing Numeric Processor...")
     num = NumericProcessor()
     print("Trying to validate input '42':", num.validate(42))  # True
-    print("Trying to validate input 'Hello':", num.validate("Hello")) # False
+    print("Trying to validate input 'Hello':", num.validate("Hello"))  # False
     print("Test invalid ingestion of string 'foo' without prior validation:")
     try:
         num.ingest("foo")
@@ -123,4 +135,3 @@ if __name__ == '__main__':
     for _ in range(2):
         i, v = log.output()
         print(f"Log entry {i}: {v}")
-
