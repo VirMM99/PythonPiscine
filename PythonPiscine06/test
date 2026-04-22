@@ -1,0 +1,3 @@
+=== Kaboom 1 ===
+Access to alchemy/grimoire/dark_spellbook.py directly
+Test import now - THIS WILL RAISE AN UNCAUGHT EXCEPTION

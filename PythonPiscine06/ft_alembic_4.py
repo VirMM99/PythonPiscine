@@ -11,4 +11,4 @@ print(
     )
 print("Testing the hidden create_earth: ", end="")
 print(f"{alchemy.create_earth()}")
-# This should not work
+# This should not work. It is on purpose explained in the subject
