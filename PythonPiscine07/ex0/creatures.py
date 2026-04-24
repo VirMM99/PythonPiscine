@@ -37,7 +37,7 @@ class Aquabub(Creature):
         super().__init__("Aquabub", "Water")
 
     def attack(self) -> str:
-        return f"{self.type} uses Water Gun!"
+        return f"{self.name} uses Water Gun!"
 
 
 class Torragon(Creature):

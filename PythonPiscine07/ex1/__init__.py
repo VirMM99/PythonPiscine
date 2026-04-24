@@ -1,11 +1,11 @@
 from .factory1 import (
-                        CreatureFactory,
+                        CreatureFactoryOne,
                         HealingCreatureFactory,
                         TransformCreatureFactory
                         )
 
 __all__ = [
-        "CreatureFactory",
+        "CreatureFactoryOne",
         "HealingCreatureFactory",
         "TransformCreatureFactory"
         ]

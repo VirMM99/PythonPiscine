@@ -1,28 +1,31 @@
 from abc import ABC, abstractmethod
-from .creatures1 import Creature, Sproutling, Bloomelle, Shiftling, Morphagon
+from .creatures1 import (
+                        CreatureOne, Sproutling, Bloomelle,
+                        Shiftling, Morphagon
+                        )
 
 
-class CreatureFactory(ABC):
+class CreatureFactoryOne(ABC):
     @abstractmethod
-    def create_base(self) -> Creature:
+    def create_base(self) -> CreatureOne:
         pass
 
     @abstractmethod
-    def create_evolved(self) -> Creature:
+    def create_evolved(self) -> CreatureOne:
         pass
 
 
-class HealingCreatureFactory(CreatureFactory):
-    def create_base(self) -> Creature:
+class HealingCreatureFactory(CreatureFactoryOne):
+    def create_base(self) -> CreatureOne:
         return Sproutling()
 
-    def create_evolved(self) -> Creature:
+    def create_evolved(self) -> CreatureOne:
         return Bloomelle()
 
 
-class TransformCreatureFactory(CreatureFactory):
-    def create_base(self) -> Creature:
+class TransformCreatureFactory(CreatureFactoryOne):
+    def create_base(self) -> CreatureOne:
         return Shiftling()
 
-    def create_evolved(self) -> Creature:
+    def create_evolved(self) -> CreatureOne:
         return Morphagon()
