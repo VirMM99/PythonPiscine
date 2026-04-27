@@ -35,5 +35,4 @@ print(fern.show())
 # i = 0
 # for plant_element in list:
 #     i += 1
-#     print(plant_element.created_plant())
 # print(f"\nTotal plants created: {i}")

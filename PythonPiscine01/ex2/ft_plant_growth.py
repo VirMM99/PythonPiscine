@@ -20,6 +20,9 @@ sunflower = Plant("sunflower", 80, 45)
 
 print("=== Garden Plant Growth ===")
 
+print(rose.get_info())
+rose.grow()
+rose.age()
 initial_height = rose.height
 
 for day in range(1, 8):
@@ -28,5 +31,5 @@ for day in range(1, 8):
     rose.grow()
     rose.age()
 
-growth = round(rose.height - initial_height)
+growth = round(rose.height - initial_height, 1)
 print(f"Growth this week: {growth}cm")
