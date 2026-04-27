@@ -31,11 +31,3 @@ def test_temperature() -> None:
 
 test_temperature()
 
-# try:
-#     num = int("abc")
-# except ValueError as e:
-#     print(e)
-# except FileNotFoundError as e:
-#     print(e)
-# except Exception as e:
-#     print(e)
