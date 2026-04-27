@@ -15,21 +15,22 @@ class Plant:
         return f"{self.name}: {round(self.height, 1)}cm, {self.ages} days old"
 
 
-rose = Plant("rose", 25, 30)
-sunflower = Plant("sunflower", 80, 45)
+if __name__ == "__main__":
+    rose = Plant("rose", 25, 30)
+    sunflower = Plant("sunflower", 80, 45)
 
-print("=== Garden Plant Growth ===")
+    print("=== Garden Plant Growth ===")
 
-print(rose.get_info())
-rose.grow()
-rose.age()
-initial_height = rose.height
-
-for day in range(1, 8):
-    print(f"=== Day {day} ===")
     print(rose.get_info())
     rose.grow()
     rose.age()
+    initial_height = rose.height
 
-growth = round(rose.height - initial_height, 1)
-print(f"Growth this week: {growth}cm")
+    for day in range(1, 8):
+        print(f"=== Day {day} ===")
+        print(rose.get_info())
+        rose.grow()
+        rose.age()
+
+    growth = round(rose.height - initial_height, 1)
+    print(f"Growth this week: {growth}cm")

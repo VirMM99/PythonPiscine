@@ -19,17 +19,18 @@ class Plant:
         )
 
 
-rose = Plant("rose", 25, 30)
-oak = Plant("oak", 200, 365)
-cactus = Plant("cactus", 5, 90)
-sunflower = Plant("sunflower", 80, 45)
-fern = Plant("fern", 15, 120)
-print("=== Plant Factory Output ===")
-print(rose.show())
-print(oak.show())
-print(cactus.show())
-print(sunflower.show())
-print(fern.show())
+if __name__ == "__main__":
+    rose = Plant("rose", 25, 30)
+    oak = Plant("oak", 200, 365)
+    cactus = Plant("cactus", 5, 90)
+    sunflower = Plant("sunflower", 80, 45)
+    fern = Plant("fern", 15, 120)
+    print("=== Plant Factory Output ===")
+    print(rose.show())
+    print(oak.show())
+    print(cactus.show())
+    print(sunflower.show())
+    print(fern.show())
 
 # list = [rose, oak, cactus, sunflower, fern]
 # i = 0
