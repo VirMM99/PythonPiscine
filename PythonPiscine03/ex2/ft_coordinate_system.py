@@ -3,7 +3,7 @@
 import math
 
 
-def get_player_pos():
+def get_player_pos() -> tuple[float, float, float]:
     while True:
         user_input = input(
                             "Enter new coordinates as "
@@ -24,15 +24,18 @@ def get_player_pos():
                 error = True
                 break
         if not error:
-            return tuple(valid_coord)
+            return (valid_coord[0], valid_coord[1], valid_coord[2])
 
 
-def calculate_distance(position) -> float:
+def calculate_distance(position: tuple[float, float, float]) -> float:
     x, y, z = position
     return math.sqrt(x**2 + y**2 + z**2)
 
 
-def distance_in_between(p1, p2) -> float:
+def distance_in_between(
+        p1: tuple[float, float, float],
+        p2: tuple[float, float, float]
+        ) -> float:
     x1, y1, z1 = p1
     x2, y2, z2 = p2
     return math.sqrt((x2-x1)**2 + (y2-y1)**2 + (z2-z1)**2)

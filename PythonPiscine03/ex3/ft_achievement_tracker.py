@@ -3,7 +3,7 @@
 import random
 
 # Global list of acievements
-achievements = [
+achievements: list[str] = [
     "Crafting Genius",
     "World Savior",
     "Master Explorer",
@@ -22,7 +22,7 @@ achievements = [
 
 
 # To generate a player's achievements
-def gen_player_achievements():
+def gen_player_achievements() -> set[str]:
     count = random.randint(4, len(achievements))
     selected = random.sample(achievements, count)
     return set(selected)
