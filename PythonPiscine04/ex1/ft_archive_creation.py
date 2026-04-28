@@ -1,9 +1,9 @@
 
-
+from typing import TextIO
 import sys
 
 
-def main():
+def main() -> None:
     # If they dont give you the file in the arguments(argv[1] is missing)
     if len(sys.argv) != 2:
         print(f"Usage: {sys.argv[0]} <file>")
@@ -13,12 +13,11 @@ def main():
     print(f"Accessing file '{filename}'")
 
     try:
-        f = open(filename, "r")
+        f: TextIO = open(filename, "r")
     except Exception as e:
         print(f"Error opening file '{filename}': {e}")
         return
-
-    content = []
+    content: list[str] = []
     print("---\n")
     for line in f:
         content.append(line)
@@ -28,7 +27,7 @@ def main():
 
     f.close()
     print(f"File '{filename}'closed.")
-    new_content = []
+    new_content: list[str] = []
     print()
     print("Transform data:")
     print("---\n")
@@ -39,7 +38,7 @@ def main():
     print("\n")
     print("---")
 
-    new_file = input("Enter new file name (or empty):")
+    new_file: str = input("Enter new file name (or empty):")
     if new_file == "":
         print("Not saving data.")
         return
@@ -54,7 +53,7 @@ def main():
 if __name__ == "__main__":
     main()
 
-# Structure you should have now
+# Structure:
 # 1.Read file + store content
 # 2.Print original
 # 3.Close file

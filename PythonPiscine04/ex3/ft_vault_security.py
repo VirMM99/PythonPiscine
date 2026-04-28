@@ -1,10 +1,12 @@
 
 
-def secure_archive(filename, mode="r", content=None):
+def secure_archive(
+        filename: str, mode: str = "r", content: str | None = None
+        ) -> tuple[bool, str]:
     try:
         if mode == "r":
             with open(filename, "r") as f:
-                data = f.read()
+                data: str = f.read()
                 return (True, data)
         elif mode == "w":
             if content is None:

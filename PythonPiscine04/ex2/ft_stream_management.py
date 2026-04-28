@@ -3,7 +3,7 @@
 import sys
 
 
-def main():
+def main() -> None:
     # If they dont give you the file in the arguments(argv[1] is missing)
     if len(sys.argv) != 2:
         print(f"Usage: {sys.argv[0]} <file>")
@@ -18,7 +18,7 @@ def main():
         sys.stderr.write(f"[STDERR] Error opening file '{filename}': {e}\n")
         return
 
-    content = []
+    content: list[str] = []
     print("---\n")
     for line in f:
         content.append(line)
@@ -28,7 +28,7 @@ def main():
 
     f.close()
     print(f"File '{filename}'closed.")
-    new_content = []
+    new_content: list[str] = []
     print()
     print("Transform data:")
     print("---\n")
@@ -41,7 +41,7 @@ def main():
 
     sys.stdout.write("Enter new file name (or empty): ")
     sys.stdout.flush()
-    new_file = sys.stdin.readline().rstrip("\n")
+    new_file: str = sys.stdin.readline().rstrip("\n")
     if new_file == "":
         print("Not saving data.")
         return
