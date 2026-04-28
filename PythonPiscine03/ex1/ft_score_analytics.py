@@ -28,7 +28,7 @@ def count_of_args(av: list[str]) -> None:
         print(f"Total players: {len(av) - 1}")
         print(f"Total score: {sum(valid_scores)}")
         average = sum(valid_scores) / (len(av) - 1)
-        print(f"Average score: {int(average)}")
+        print(f"Average score: {round(average, 1)}")
         print(f"High score: {max(valid_scores)}")
         print(f"Low score: {min(valid_scores)}")
         ranges = max(valid_scores) - min(valid_scores)
