@@ -5,6 +5,10 @@ from typing import Any, Protocol
 
 
 class DataProcessor(ABC):
+    name: str
+    total_processed: int
+    buffer: list[Any]
+
     @abstractmethod
     # Decides if it can handle data # Debe acceptar any
     # y retornar True or False
@@ -16,6 +20,10 @@ class DataProcessor(ABC):
     def process(self, data: Any) -> None:
         pass
 
+    @abstractmethod
+    def output(self, n: int) -> list[tuple[int, str]]:
+        pass
+
 
 class ExportPlugin(Protocol):
     def process_output(self, data: list[tuple[int, str]]) -> None:
@@ -23,16 +31,16 @@ class ExportPlugin(Protocol):
 
 
 class DataStream:
-    def __init__(self):
+    def __init__(self) -> None:
         # Stores processors
-        self.processors = []
+        self.processors: list[DataProcessor] = []
 
     # Register processors, No type checking, polymorphism handles it
-    def register_processor(self, proc):
+    def register_processor(self, proc: DataProcessor) -> None:
         self.processors.append(proc)
 
     # Asking each processor, if they can handled OK if None of them, then Error
-    def process_stream(self, stream):
+    def process_stream(self, stream: Any) -> None:
         for element in stream:
             handled = False
             for proc in self.processors:
@@ -46,7 +54,7 @@ class DataStream:
                         f"{element}"
                         )
 
-    def print_processors_stats(self):
+    def print_processors_stats(self) -> None:
         print("== DataStream statistics ==")
         if not self.processors:
             print("No processor found, no data")
@@ -54,11 +62,11 @@ class DataStream:
         for proc in self.processors:
             print(
                     f"{proc.name}: total {proc.total_processed}"
-                    f"items processed, remaining {len(proc.buffer)}"
-                    "on processor"
+                    f" items processed, remaining {len(proc.buffer)}"
+                    " on processor"
                 )
 
-    def output_pipeline(self, nb: int, plugin: ExportPlugin):
+    def output_pipeline(self, nb: int, plugin: ExportPlugin) -> None:
         for proc in self.processors:
             data = proc.output(nb)
             if data:
@@ -66,20 +74,20 @@ class DataStream:
 
 
 class NumericProcessor(DataProcessor):
-    def __init__(self):
+    def __init__(self) -> None:
         self.name = "Numeric Processor"
         self.total_processed = 0
-        self.buffer = []  # Or list of stored items
+        self.buffer: list[float] = []  # Or list of stored items
         self.output_index = 0
 
-    def can_process(self, data):
+    def can_process(self, data: Any) -> bool:
         return (
             isinstance(data, (int, float)) or
             (isinstance(data, list) and
                 all(isinstance(x, (int, float)) for x in data))
         )
 
-    def process(self, data):
+    def process(self, data: Any) -> None:
         if isinstance(data, list):
             self.buffer.extend(data)
             self.total_processed += len(data)
@@ -87,7 +95,7 @@ class NumericProcessor(DataProcessor):
             self.buffer.append(data)
             self.total_processed += 1
 
-    def output(self, n: int):
+    def output(self, n: int) -> list[tuple[int, str]]:
         taken = self.buffer[:n]
         self.buffer = self.buffer[n:]
         result = []
@@ -98,19 +106,19 @@ class NumericProcessor(DataProcessor):
 
 
 class TextProcessor(DataProcessor):
-    def __init__(self):
+    def __init__(self) -> None:
         self.name = "Text Processor"
         self.total_processed = 0
         self.output_index = 0
-        self.buffer = []
+        self.buffer: list[str] = []
 
-    def can_process(self, data):
+    def can_process(self, data: Any) -> bool:
         return (
             isinstance(data, str) or
             (isinstance(data, list) and all(isinstance(x, str) for x in data))
         )
 
-    def process(self, data):
+    def process(self, data: Any) -> None:
         if isinstance(data, list):
             self.buffer.extend(data)
             self.total_processed += len(data)
@@ -118,7 +126,7 @@ class TextProcessor(DataProcessor):
             self.buffer.append(data)
             self.total_processed += 1
 
-    def output(self, n: int):
+    def output(self, n: int) -> list[tuple[int, str]]:
         taken = self.buffer[:n]
         self.buffer = self.buffer[n:]
         result = []
@@ -129,23 +137,23 @@ class TextProcessor(DataProcessor):
 
 
 class LogProcessor(DataProcessor):
-    def __init__(self):
+    def __init__(self) -> None:
         self.name = "Log Processor"
         self.total_processed = 0
-        self.buffer = []
+        self.buffer: list[dict[str, Any]] = []
         self.output_index = 0
 
-    def can_process(self, data):
+    def can_process(self, data: Any) -> bool:
         return (
                 isinstance(data, list) and
                 all(isinstance(x, dict) for x in data)
             )
 
-    def process(self, data):
+    def process(self, data: Any) -> None:
         self.buffer.extend(data)
         self.total_processed += len(data)
 
-    def output(self, n: int):
+    def output(self, n: int) -> list[tuple[int, str]]:
         taken = self.buffer[:n]
         self.buffer = self.buffer[n:]
 
@@ -160,14 +168,14 @@ class LogProcessor(DataProcessor):
 # No inheritance required por plugins. that's duck typing.
 # It looks like a duck it is a duck
 class CSVPlugin:
-    def process_output(self, data):
+    def process_output(self, data: list[tuple[int, str]]) -> None:
         print("CSV Output:")
         values = [v for _, v in data]
         print(",".join(values))
 
 
 class JSONPlugin:
-    def process_output(self, data):
+    def process_output(self, data: list[tuple[int, str]]) -> None:
         print("JSON Output:")
         items = [f'"item_{i}": "{v}"' for i, v in data]
         print("{" + ", ".join(items) + "}")
@@ -216,6 +224,7 @@ if __name__ == "__main__":
     print()
     ds.print_processors_stats()
     print("\nSend another batch of data:", new_stream)
+    print()
     ds.process_stream(new_stream)
     ds.print_processors_stats()
     print("\nSend 5 processed data from each processor to a JSON plugin:")
