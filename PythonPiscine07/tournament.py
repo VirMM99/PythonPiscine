@@ -1,9 +1,10 @@
+from typing import List, Tuple, Any
 from ex0 import FlameFactory, AquaFactory
 from ex1 import HealingCreatureFactory, TransformCreatureFactory
 from ex2.strategy import NormalStrategy, AggressiveStrategy, DefensiveStrategy
 
 
-def tournament(opponents):
+def tournament(opponents: List[Tuple[Any, Any]]) -> None:
     print("*** Tournament ***")
     print(f"{len(opponents)} opponents involved")
     # evita duplicados y autobatallas
@@ -26,7 +27,7 @@ def tournament(opponents):
                 return
 
 
-def format_opponents(opponents):
+def format_opponents(opponents: List[Tuple[Any, Any]]) -> str:
     names = []
     for factory, strategy in opponents:
         factory_name = factory.__class__.__name__.replace("Factory", "")

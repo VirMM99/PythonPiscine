@@ -1,7 +1,8 @@
+from typing import Any
 from ex1 import HealingCreatureFactory, TransformCreatureFactory
 
 
-def healing_factory(factory):
+def healing_factory(factory: Any) -> None:
     base = factory.create_base()
     evolved = factory.create_evolved()
 
@@ -16,7 +17,7 @@ def healing_factory(factory):
     print(evolved.heal())
 
 
-def transform_factory(factory):
+def transform_factory(factory: Any) -> None:
     base = factory.create_base()
     evolved = factory.create_evolved()
 

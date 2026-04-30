@@ -1,7 +1,8 @@
+from typing import Any
 from ex0 import FlameFactory, AquaFactory
 
 
-def test_factory(factory):
+def test_factory(factory: Any) -> None:
     base = factory.create_base()
     evolved = factory.create_evolved()
 
@@ -12,7 +13,7 @@ def test_factory(factory):
     print(evolved.attack())
 
 
-def battle(factory1, factory2):
+def battle(factory1: Any, factory2: Any) -> None:
     c1 = factory1.create_base()
     c2 = factory2.create_base()
 
