@@ -3,7 +3,7 @@
 import alchemy
 
 
-def heal():
+def heal() -> str:
     return alchemy.healing_potion()
 
 
