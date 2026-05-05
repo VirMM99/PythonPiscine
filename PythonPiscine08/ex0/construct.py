@@ -1,9 +1,12 @@
+import sys
+import os
+import site
 
-
-import sys, os, site
-
-# If in terminal sys.prefix = sys.base_prefix then we are not in a venv, we are in global
+# If in terminal sys.prefix = sys.base_prefix
+# then we are not in a venv, we are in global
 in_venv = sys.prefix != sys.base_prefix
+
+
 def check_matrix() -> None:
     print("MATRIX STATUS: ", end="")
     if in_venv:
@@ -11,10 +14,13 @@ def check_matrix() -> None:
     else:
         print("You're still plugged in")
 
+
 # Para ver the name of the venv
 env_path = sys.prefix
 env_name = os.path.basename(env_path)
 packages_path = site.getsitepackages()[0]
+
+
 def check_env() -> None:
     if in_venv:
         print(f"Current Python: {sys.executable}")
@@ -27,7 +33,7 @@ def check_env() -> None:
         print(packages_path)
     else:
         print(f"Current Python: {sys.executable}")
-        print(f"Virtual Enviroment: None detected")
+        print("Virtual Enviroment: None detected")
         print("\nWARNING: You're in the global environment!")
         print("The machines can see everything you install.")
         print("\nTo enter the construct, run:")

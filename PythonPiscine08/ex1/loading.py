@@ -1,26 +1,32 @@
-import importlib
 
 
 # Checkear si un paquete existe
-def check_package(name: str):
-    spec = importlib.util.find_spec(name)
-    if spec is None:
-        print(f"[MISSING] {name}")
-        return False
+def check_package() -> bool:
+    try:
+        import pandas as pd
+        print(f"[OK] pandas ({pd.__version__}) - Data manipulation ready")
+        pd_ok = True
+    except ModuleNotFoundError:
+        print("[MISSING] pandas")
+        pd_ok = False
+    try:
+        import numpy as np
+        print(f"[OK] numpy ({np.__version__}) - Numerical computation ready")
+        np_ok = True
+    except ModuleNotFoundError:
+        print("[MISSING] numpy")
+        np_ok = False
+    try:
+        import matplotlib.pyplot as plt
+        print(f"[OK] matplotlib ({plt.__version__}) - Visualization ready")
+        plt_ok = True
+    except ModuleNotFoundError:
+        print("[MISSING] matplotlib")
+        plt_ok = False
+    if not np_ok or not pd_ok or not plt_ok:
+        all_ok = False
     else:
-        module = importlib.import_module(name)
-        version = getattr(module, "__version__", "unknown")
-        print(f"[OK] {name} ({version}) - ready")
-        return True
-
-def check_all_packs() -> bool:
-    packages = ["pandas", "numpy", "matplotlib"]
-
-    all_ok = True
-
-    for pkg in packages:
-        if not check_package(pkg):
-            all_ok = False
+        all_ok = True
     if not all_ok:
         print("\nMissing dependencies!")
         print("Install with pip:")
@@ -31,18 +37,18 @@ def check_all_packs() -> bool:
         print("\n--- Dependency Management ---")
         print("pip uses requirements.txt")
         print("Poetry uses pyproject.toml and virtual environments")
-        
     return all_ok
+
 
 if __name__ == "__main__":
     print("LOADING STATUS: Loading programs...")
     print("Checking dependencies:")
 
-    if not check_all_packs():
+    if not check_package():
         exit()
 
-    import pandas as pd
     import numpy as np
+    import pandas as pd
     import matplotlib.pyplot as plt
 
     print("\nAnalyzing Matrix data...")
