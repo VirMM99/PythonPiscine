@@ -17,7 +17,7 @@ def check_package() -> bool:
         print("[MISSING] numpy")
         np_ok = False
     try:
-        import matplotlib.pyplot as plt
+        import matplotlib as plt
         print(f"[OK] matplotlib ({plt.__version__}) - Visualization ready")
         plt_ok = True
     except ModuleNotFoundError:
@@ -42,7 +42,7 @@ def check_package() -> bool:
 
 if __name__ == "__main__":
     print("LOADING STATUS: Loading programs...")
-    print("Checking dependencies:")
+    print("\nChecking dependencies:")
 
     if not check_package():
         exit()
@@ -61,5 +61,5 @@ if __name__ == "__main__":
     # Crear un gáfico fácil un histograma
     plt.hist(df["values"])
     plt.savefig("matrix_analysis.png")
-    print("Analysis complete!")
+    print("\nAnalysis complete!")
     print("Results saved to: matrix_analysis.png")
