@@ -4,7 +4,7 @@ import os
 # Cargar .env
 load_dotenv()
 
-print("ORACLE STATUS: Reading the Matrix...\n")
+print("\nORACLE STATUS: Reading the Matrix...\n")
 
 mode = os.getenv("MATRIX_MODE")
 db = os.getenv("DATABASE_URL")
@@ -50,3 +50,5 @@ print("\nEnviroment security check:")
 print("[OK] No hardcoded secrets detected")
 print("[OK] .env file properly configured")
 print("[OK] Production overrides available")
+
+print("\nThe Oracle sees all configurations.")
