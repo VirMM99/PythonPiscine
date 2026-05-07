@@ -41,6 +41,7 @@ def check_package() -> bool:
 
 
 if __name__ == "__main__":
+    print()
     print("LOADING STATUS: Loading programs...")
     print("\nChecking dependencies:")
 
