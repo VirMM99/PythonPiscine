@@ -44,6 +44,7 @@ def check_env() -> None:
 
 
 if __name__ == "__main__":
+    print()
     check_matrix()
     print()
     check_env()
