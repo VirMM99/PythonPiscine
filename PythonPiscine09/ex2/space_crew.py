@@ -76,32 +76,32 @@ def main() -> None:
             launch_date=datetime.now(),
             # Nested porque primero valida CrewMember y luego SpaceMission
             crew=[
-                CrewMember(
-                    member_id="C001",
-                    name="Sarah Connor",
-                    rank=CrewRank.CAPTAIN,
-                    age=45,
-                    specialization="Mission Command",
-                    years_experience=15
-                )
-                CrewMember(
-                    member_id="C002",
-                    name="John Smith",
-                    rank=CrewRank.LIEUTENANT,
-                    age=35,
-                    specialization="Navigation",
-                    years_experience=9
-                )
-                CrewMember(
-                    member_id="C003",
-                    name="Alice Johnson",
-                    rank=CrewRank.OFFICER,
-                    age=40,
-                    specialization="Engineering",
-                    years_experience=3
-                )
-            ]
-        )
+                    CrewMember(
+                        member_id="C001",
+                        name="Sarah Connor",
+                        rank=CrewRank.COMMANDER,
+                        age=45,
+                        specialization="Mission Command",
+                        years_experience=15
+                    ),
+                    CrewMember(
+                        member_id="C002",
+                        name="John Smith",
+                        rank=CrewRank.LIEUTENANT,
+                        age=35,
+                        specialization="Navigation",
+                        years_experience=9
+                    ),
+                    CrewMember(
+                        member_id="C003",
+                        name="Alice Johnson",
+                        rank=CrewRank.OFFICER,
+                        age=40,
+                        specialization="Engineering",
+                        years_experience=3
+                    )
+                ]
+            )
         print("Valid mission created:")
         print(f"Mission: {valid_mission.mission_name}")
         print(f"ID: {valid_mission.mission_id}")
