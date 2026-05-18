@@ -1,10 +1,12 @@
 from collections.abc import Callable
 
+
 # Funciones que recuerdan variables(eso es un closure)
 # Función que devuelve otra función
 # cuenta llamadas y recuerda el valor
 def mage_counter() -> Callable:
     count = 0
+
     def counter() -> int:
         # porque queremos modificar count
         nonlocal count
@@ -16,6 +18,7 @@ def mage_counter() -> Callable:
 # Acumula poder
 def spell_accumulator(initial_power: int) -> Callable:
     total_power = initial_power
+
     def accumulator(amount: int) -> int:
         nonlocal total_power
         total_power += amount
@@ -33,9 +36,11 @@ def enchantment_factory(enchantment_type: str) -> Callable:
 def memory_vault() -> dict[str, Callable]:
     # Crear memoria Privada
     memory = {}
+
     # Guarda cosas
     def store(key: str, value: object) -> None:
         memory[key] = value
+
     # Busca cosas
     def recall(key: str) -> object:
         # Si existe
