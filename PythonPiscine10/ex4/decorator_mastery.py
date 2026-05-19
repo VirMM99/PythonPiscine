@@ -115,6 +115,7 @@ if __name__ == "__main__":
     def failed_spell() -> str:
         raise Exception("Spell failed")
     print(failed_spell())
+    print("Waaaaaaagh spelled !")
 
     print("\nTesting MageGuild...")
     print(

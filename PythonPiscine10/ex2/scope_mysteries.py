@@ -58,17 +58,17 @@ if __name__ == "__main__":
 
     print("Testing mage counter...")
     counter_a = mage_counter()
-    print(counter_a())
-    print(counter_a())
+    print(f"counter_a call 1: {counter_a()}")
+    print(f"counter_a call 2: {counter_a()}")
     # Cada clousure tiene su propia memoria
     # empieza desde 0 otra vez
     counter_b = mage_counter()
-    print(counter_a())
+    print(f"counter_b call 1: {counter_b()}")
 
     print("\nTesting spell acumulator...")
     power = spell_accumulator(100)
-    print(power(20))
-    print(power(30))
+    print(f"Base 100, add 20: {power(20)}")
+    print(f"Base 100, add 30: {power(30)}")
 
     print("\nTesting enchantment factory...")
     flaming = enchantment_factory("Flaming")
@@ -78,6 +78,7 @@ if __name__ == "__main__":
 
     print("\nTesting memory vault...")
     vault = memory_vault()
+    print("Store 'secret' = 42")
     vault["store"]("secret", 42)
-    print(vault["recall"]("secret"))
-    print(vault["recall"]("unknown"))
+    print(f"Recall 'secret': {vault["recall"]("secret")}")
+    print(f"Recall 'unknown': {vault["recall"]("unknown")}")
