@@ -70,11 +70,11 @@ if __name__ == "__main__":
     ]
     sorted_artifacts = artifact_sorter(artifacts)
     print(
-        f"{sorted_artifacts[0]["name"]} "
-        f"({sorted_artifacts[0]["power"]} power)"
+        f"{sorted_artifacts[0]['name']} "
+        f"({sorted_artifacts[0]['power']} power)"
         f" comes before "
-        f"{sorted_artifacts[1]["name"]} "
-        f"({sorted_artifacts[1]["power"]} power)"
+        f"{sorted_artifacts[1]['name']} "
+        f"({sorted_artifacts[1]['power']} power)"
     )
     print("\nTesting spell transformer...")
     spells = ["fireball", "heal", "shield"]
